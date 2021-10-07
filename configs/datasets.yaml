@@ -1,0 +1,25 @@
+project_name: VideoAutoencoder
+
+RealEstate10K:
+  name: RealEstate10K
+  train_path: /home/zihang/developer/data/RealEstate10K/dataset/train/
+  test_path: /home/zihang/developer/data/RealEstate10K/dataset/test/
+  input_size: 256
+
+Matterport3D_Preatrain:
+  name: Matterport3D_Preatrain
+  train_path: /home/zihang/developer/data/matterport/images/train_mini/
+  test_path: null
+  input_size: 256
+
+Matterport3D:
+  name: Matterport3D
+  train_path: /home/zihang/developer/data/mp3d_train/
+  test_path: /home/zihang/developer/data/mp3d_test/
+  input_size: 256
+
+Replica:
+  name: Replica
+  train_path: null
+  test_path: /home/zihang/developer/data/replica_test/
+  input_size: 256

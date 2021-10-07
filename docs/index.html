@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Video Autoencoder: self-supervised disentanglement of 3D structure and motion">
+  <meta name="keywords" content="Video Autoencoder">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Video Autoencoder: self-supervised disentanglement of 3D structure and motion</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="shortcut icon" href="./favicon.ico">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <meta property="og:site_name" content="Video Autoencoder: self-supervised disentanglement of 3D structure and motion" />
+  <meta property="og:type" content="video.other" />
+  <meta property="og:title" content="Video Autoencoder: self-supervised disentanglement of 3D structure and motion" />
+  <meta property="og:description" content="Lai, et al. Video Autoencoder: self-supervised disentanglement of 3D structure and motion." />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Video Autoencoder: self-supervised disentanglement of 3D structure and motion" />
+  <meta name="twitter:description" content="Lai, et al. Video Autoencoder: self-supervised disentanglement of 3D structure and motion." />
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Video Autoencoder: self-supervised disentanglement of static 3D structure and motion</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://zlai0.github.io/">Zihang Lai</a><sup>1</sup>&emsp;
+              <a href="https://www.sifeiliu.net/">Sifei Liu</a><sup>2</sup>&emsp;
+              <a href="https://people.eecs.berkeley.edu/~efros/">Alexei A. Efros</a><sup>3</sup>&emsp;
+              <a href="https://xiaolonw.github.io/">Xiaolong Wang</a><sup>4</sup>
+              <br /><sup>1</sup>CMU&emsp; <sup>2</sup>NVIDIA&emsp; <sup>3</sup>UC Berkeley&emsp; <sup>4</sup>UC San Diego
+              <span class="brmod"></span>ICCV 2021 (Oral)</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="./resources/video_autoencoder.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2110.02951"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="#method_video"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/zlai0/VideoAutoencoder/" 
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="hero-body">
+    <div class="columns is-centered">
+      <div class="column is-9">
+        <video id="teaser" autoplay muted loop height="100%">
+          <source src="./resources/teaser.mp4"
+                  type="video/mp4">
+        </video>
+        <h2 class="subtitle has-text-centered">
+          Single-view view synthesis results on RealEstate10K dataset.
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container">
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We present Video Autoencoder for learning disentangled representations of 3D structure
+            and camera pose from videos in a self-supervised manner. Relying on temporal continuity
+            in videos, our work assumes that the 3D scene structure in nearby video frames remains 
+            static. Given a sequence of video frames as input, the Video Autoencoder extracts a 
+            disentangled representation of the scene including: (i) a temporally-consistent deep 
+            voxel feature to represent the 3D structure and (ii) a 3D trajectory of camera poses
+             for each frame. These two representations will then be re-entangled for rendering
+            the input video frames. Video Autoencoder can be trained directly using a pixel 
+            reconstruction loss, without any ground truth 3D or camera pose annotations. The 
+            disentangled representation can be applied to a range of tasks, including novel view 
+            synthesis, camera pose estimation, and video generation by motion following. 
+            We evaluate our method on several large-scale natural video datasets, and show 
+            generalization results on out-of-domain images.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Paper video. -->
+  <br/>
+  <br/>
+  <div id="method_video" class="columns is-centered has-text-centered">
+    <div class="column is-half">
+      <h2 class="title is-3">Video</h2>
+      <div class="publication-video">
+<!--         <video controls>
+          <source src="./resources/spotlight.mp4"
+                  type="video/mp4">
+        </video> -->
+        <iframe src="https://www.youtube-nocookie.com/embed/SIg_8URon14"
+                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+  <!--/ Paper video. -->
+
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <p>
+            The proposed Video Autoencoder is a conceptually simple method for
+            encoding a video into a 3D representation and a trajectory in a 
+            completely self-supervised manner (<b>no 3D labels</b> are required).
+          </p>
+          <div class="column">
+            <img src="./resources/method.png" />
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+      <!-- anime. -->
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-3">Temporal super-resolution</h2>
+          <p>
+            Our model could be used to increase the frame rate of videos - by simply interpolating between the estimated trajectories between two video frames.
+          </p>
+          <video id="anime" autoplay controls muted loop height="100%">
+            <source src="./resources/smooth.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <!--/ anime. -->
+
+      <!-- painting. -->
+      <div class="column">
+        <h2 class="title is-3">Camera stabilization</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              Here, we "stabilize" all video frames to a fixed viewpoint. With Video Autoencoder, we can simply warp the whole video to the first frame with the estimated pose difference.
+            </p>
+            <video id="painting-video" controls height="100%">
+              <source src="./resources/stabl.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--/ painting. -->
+    <div class="columns is-centered">
+
+      <!-- anime. -->
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-3">Test on anime scenes</h2>
+          <p>
+            Our model could also work for out-of-distribution data such as anime scenes, <i>Spirited Away</i>.
+          </p>
+          <video id="anime" controls loop height="100%">
+            <source src="./resources/anime.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <!--/ anime. -->
+
+      <!-- painting. -->
+      <div class="column">
+        <h2 class="title is-3">and even paintings...</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              Video Autoencoder could generate results as if we are walking into Vincent van Gogh’s bedroom in Arles.
+            </p>
+            <video id="painting-video" controls loop height="100%">
+              <source src="./resources/painting.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--/ painting. -->
+
+    <!-- Video to Trajectory. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Trajectory estimation in videos</h2>
+        <div class="content has-text-justified">
+          <p>
+            We can also estimate trajectory in videos. For each video clip, we can estimate the relative pose between every two video frames and chain them together to get the full trajectory.</p>
+        </div>
+
+        <div class="content has-text-centered">
+          <video id="replay-video"
+                 controls
+                 muted
+                 preload
+                 loop
+                 width="90%">
+            <source src="./resources/trajectory.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <!--/ Re-rendering. -->
+
+      </div>
+    </div>
+    <!--/ Video to Trajectory. -->
+
+
+
+
+<section class="section id="BibTeX"">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">BibTeX</h2>
+        <div class="content has-text-justified">
+          <pre><code>@inproceedings{Lai21a,
+        title={Video Autoencoder: self-supervised disentanglement of 3D structure and motion},
+        author={Lai, Zihang and Liu, Sifei and Efros, Alexei A and Wang, Xiaolong},
+        booktitle={ICCV},
+        year={2021}
+}</code></pre>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a href="./resources/video_autoencoder.pdf" class="large-font bottom_buttons">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="large-font bottom_buttons" herf="https://github.com/zlai0/VideoAutoencoder">
+        <i class="fab fa-github"></i>
+      </a>
+      <br />
+      <p>Page template borrowed from <a href="https://nerfies.github.io/"><span class="dnerf">D-NeRF</span></a> and <a href="https://worldsheet.github.io/"><span>Worldsheet</span>.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
