@@ -36,7 +36,7 @@ We present Video Autoencoder for learning disentangled representations of 3D str
 ## Dependencies
 The following dependencies are not strict - they are the versions that we use.
 - [Python (3.8.5)](https://www.python.org/downloads/)
-- [PyTorch (1.7.1)](http://pytorch.org) 
+- [PyTorch (1.7.1)](http://pytorch.org)
 - CUDA 11.0
 - Python packages, install with ``pip install -r requirements.txt``
 
@@ -67,12 +67,12 @@ dataset/
         ...
 ```
 3. Subsample the training set at one-third of the original frame-rate (so that the motion is sufficiently large). You can use ``scripts/subsample_dataset.py``.
-4. A list of videos ids that we used (10K for training and 5K for testing) is provided here: 
+4. A list of videos ids that we used (10K for training and 5K for testing) is provided here:
     1. [Training video ids](./data/video_ids_train.txt) and [testing video ids](./data/video_ids_test.txt).
     2. Note: as time changes, the availability of videos could change.
-         
+
 ### Matterport 3D (this could be tricky):
-1. Install [habitat-api](https://github.com/facebookresearch/habitat-api) and [habitat-sim](https://github.com/facebookresearch/habitat-sim). You need to use the following repo version (see this [SynSin issue](https://github.com/facebookresearch/synsin/issues/2) for details): 
+1. Install [habitat-api](https://github.com/facebookresearch/habitat-api) and [habitat-sim](https://github.com/facebookresearch/habitat-sim). You need to use the following repo version (see this [SynSin issue](https://github.com/facebookresearch/synsin/issues/2) for details):
     1. habitat-sim: d383c2011bf1baab2ce7b3cd40aea573ad2ddf71
     2. habitat-api: e94e6f3953fcfba4c29ee30f65baa52d6cea716e
 
@@ -95,13 +95,13 @@ dataset/
                 ...
     ```
 3. **Walk-through videos for pretraining**: We use a ``ShortestPathFollower`` function provided by the Habitat navigation package to generate episodes of tours of the rooms. See ``scripts/generate_matterport3d_videos.py`` for details.
-4. **Training and testing view synthesis pairs**: we generally follow the same steps as the [SynSin data instruction](https://github.com/facebookresearch/synsin/blob/main/MP3D.md). The main difference is that we precompute all the image pairs.  See ``scripts/generate_matterport3d_train_image_pairs.py`` and ``scripts/generate_matterport3d_test_image_pairs.py`` for details. 
+4. **Training and testing view synthesis pairs**: we generally follow the same steps as the [SynSin data instruction](https://github.com/facebookresearch/synsin/blob/main/MP3D.md). The main difference is that we precompute all the image pairs.  See ``scripts/generate_matterport3d_train_image_pairs.py`` and ``scripts/generate_matterport3d_test_image_pairs.py`` for details.
 
 ###Replica:
 1. **Testing view synthesis pairs**: This procedure is similar to step 4 in Matterport3D - with only the specific dataset changed. See ``scripts/generate_replica_test_image_pairs.py`` for details.
 
 ### Configurations
-Finally, change the data paths in ``configs/dataset.yaml`` to your data location. 
+Finally, change the data paths in ``configs/dataset.yaml`` to your data location.
 
 ## Pre-trained models
 - Pre-trained model (RealEstate10K): [Link](https://drive.google.com/file/d/1ddM1BF_Itg0pyvgE9uKP1aeS9XEBzN66/view?usp=sharing)
@@ -132,7 +132,7 @@ or this script (for testing Matterport3D/Replica):
 
 Some optional commands:
 
-- Select dataset: ``--dataset [RealEstate10K]`` 
+- Select dataset: ``--dataset [RealEstate10K]``
 - Max number of frames: ``--frame_limit [30]``
 - Max number of sequences: ``--video_limit [100]``
 - Use training set to evaluate: ``--train_set``
