@@ -97,7 +97,7 @@ dataset/
 3. **Walk-through videos for pretraining**: We use a ``ShortestPathFollower`` function provided by the Habitat navigation package to generate episodes of tours of the rooms. See ``scripts/generate_matterport3d_videos.py`` for details.
 4. **Training and testing view synthesis pairs**: we generally follow the same steps as the [SynSin data instruction](https://github.com/facebookresearch/synsin/blob/main/MP3D.md). The main difference is that we precompute all the image pairs.  See ``scripts/generate_matterport3d_train_image_pairs.py`` and ``scripts/generate_matterport3d_test_image_pairs.py`` for details. 
 
-###Replica:
+### Replica:
 1. **Testing view synthesis pairs**: This procedure is similar to step 4 in Matterport3D - with only the specific dataset changed. See ``scripts/generate_replica_test_image_pairs.py`` for details.
 
 ### Configurations
