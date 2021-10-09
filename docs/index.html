@@ -86,7 +86,7 @@
               </span>
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/zlai0/VideoAutoencoder/" 
+                <a href="https://github.com/zlai0/VideoAutoencoder/"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -106,14 +106,14 @@
 <section class="hero teaser">
   <div class="hero-body">
     <div class="columns is-centered">
-      <div class="column is-9">
+      <div class="column is-7">
         <video id="teaser" autoplay muted loop height="100%">
           <source src="./resources/teaser.mp4"
                   type="video/mp4">
         </video>
-        <h2 class="subtitle has-text-centered">
+        <!-- <h2 class="subtitle has-text-centered">
           Single-view view synthesis results on RealEstate10K dataset.
-        </h2>
+        </h2> -->
       </div>
     </div>
   </div>
@@ -132,16 +132,16 @@
           <p>
             We present Video Autoencoder for learning disentangled representations of 3D structure
             and camera pose from videos in a self-supervised manner. Relying on temporal continuity
-            in videos, our work assumes that the 3D scene structure in nearby video frames remains 
-            static. Given a sequence of video frames as input, the Video Autoencoder extracts a 
-            disentangled representation of the scene including: (i) a temporally-consistent deep 
+            in videos, our work assumes that the 3D scene structure in nearby video frames remains
+            static. Given a sequence of video frames as input, the Video Autoencoder extracts a
+            disentangled representation of the scene including: (i) a temporally-consistent deep
             voxel feature to represent the 3D structure and (ii) a 3D trajectory of camera poses
              for each frame. These two representations will then be re-entangled for rendering
-            the input video frames. Video Autoencoder can be trained directly using a pixel 
-            reconstruction loss, without any ground truth 3D or camera pose annotations. The 
-            disentangled representation can be applied to a range of tasks, including novel view 
-            synthesis, camera pose estimation, and video generation by motion following. 
-            We evaluate our method on several large-scale natural video datasets, and show 
+            the input video frames. Video Autoencoder can be trained directly using a pixel
+            reconstruction loss, without any ground truth 3D or camera pose annotations. The
+            disentangled representation can be applied to a range of tasks, including novel view
+            synthesis, camera pose estimation, and video generation by motion following.
+            We evaluate our method on several large-scale natural video datasets, and show
             generalization results on out-of-domain images.
           </p>
         </div>
@@ -177,7 +177,7 @@
         <div class="content has-text-justified">
           <p>
             The proposed Video Autoencoder is a conceptually simple method for
-            encoding a video into a 3D representation and a trajectory in a 
+            encoding a video into a 3D representation and a trajectory in a
             completely self-supervised manner (<b>no 3D labels</b> are required).
           </p>
           <div class="column">
@@ -206,7 +206,7 @@
           <p>
             Our model could be used to increase the frame rate of videos - by simply interpolating between the estimated trajectories between two video frames.
           </p>
-          <video id="anime" autoplay controls muted loop height="100%">
+          <video width="100%" muted defaultMuted playsinline autoplay loop>
             <source src="./resources/smooth.mp4"
                     type="video/mp4">
           </video>
@@ -222,7 +222,7 @@
             <p>
               Here, we "stabilize" all video frames to a fixed viewpoint. With Video Autoencoder, we can simply warp the whole video to the first frame with the estimated pose difference.
             </p>
-            <video id="painting-video" controls height="100%">
+            <video width="100%" muted defaultMuted playsinline autoplay loop>
               <source src="./resources/stabl.mp4"
                       type="video/mp4">
             </video>
@@ -241,7 +241,7 @@
           <p>
             Our model could also work for out-of-distribution data such as anime scenes, <i>Spirited Away</i>.
           </p>
-          <video id="anime" controls loop height="100%">
+          <video width="100%" muted defaultMuted playsinline autoplay loop>
             <source src="./resources/anime.mp4"
                     type="video/mp4">
           </video>
@@ -257,7 +257,7 @@
             <p>
               Video Autoencoder could generate results as if we are walking into Vincent van Gogh’s bedroom in Arles.
             </p>
-            <video id="painting-video" controls loop height="100%">
+            <video width="100%" muted defaultMuted playsinline autoplay loop>
               <source src="./resources/painting.mp4"
                       type="video/mp4">
             </video>
@@ -278,12 +278,7 @@
         </div>
 
         <div class="content has-text-centered">
-          <video id="replay-video"
-                 controls
-                 muted
-                 preload
-                 loop
-                 width="90%">
+          <video width="100%" muted defaultMuted playsinline autoplay loop>
             <source src="./resources/trajectory.mp4"
                     type="video/mp4">
           </video>
